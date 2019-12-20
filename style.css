@@ -1,0 +1,17 @@
+#savedSearch {
+    border-style: double;
+    padding: 10%;
+    background-color:rgb(248,249,250);
+}
+
+#titleCard {
+    background-color:rgb(52,58,64);
+    color: whitesmoke;
+    padding: 20px;
+    text-align: center;
+}
+
+body {
+    background-color: gainsboro;
+}
+
