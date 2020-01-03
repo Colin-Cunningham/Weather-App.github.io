@@ -16,7 +16,7 @@ $("#search-Btn").on("click", function (){
 
 var apiKey = "=7b256f5f3c0045dd85a37bb7c20fe2fb"
 
-var fiveDayForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + ",US&units=imperial&id=524901&APPID" + apiKey
+var fiveDayForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + ",US&units=imperial&id=524901&APPID" + apiKey
 
 
 console.log(fiveDayForecast);
@@ -38,7 +38,7 @@ $.ajax({
         
         console.log(cityLat[0], cityLon[0])
         
-        var uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?appid" + apiKey + "&lat=" + cityLat[0] +  "&lon=" + cityLon[0]
+        var uvIndexURL = "https://api.openweathermap.org/data/2.5/uvi?appid" + apiKey + "&lat=" + cityLat[0] +  "&lon=" + cityLon[0]
 
 
         $.ajax({
@@ -185,7 +185,7 @@ $.ajax({
         var forecastHumidity5 = $("<p>").text("Humidity:  " + response.list[39].main.humidity + "%")
         var forecastIcon1 = $(response.list[7].weather[0])
         var forecastIcon1txt = forecastIcon1[0].icon
-        var forecastIcon1src= "http://openweathermap.org/img/wn/" + forecastIcon1txt + "@2x.png" 
+        var forecastIcon1src= "https://openweathermap.org/img/wn/" + forecastIcon1txt + "@2x.png" 
 
 
 
