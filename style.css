@@ -1,17 +1,91 @@
-#savedSearch {
-    border-style: double;
-    padding: 10%;
-    background-color:rgb(248,249,250);
+
+    #savedSearch {
+        border-style: double;
+        padding: 2%;
+        background-color:rgb(248,249,250);
+        align-content: center;
+    }
+    
+    #titleCard {
+        background-color:rgb(52,58,64);
+        color: whitesmoke;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    body {
+        background-color: gainsboro;
+    }
+    
+#previousSearch {
+    width: fit-content;
+    align-content: center;
+    margin: 0 auto;
 }
 
-#titleCard {
-    background-color:rgb(52,58,64);
-    color: whitesmoke;
-    padding: 20px;
-    text-align: center;
+#results {
+    margin: 0 auto;
 }
 
-body {
-    background-color: gainsboro;
+
+/* created classes for UV index if else statement */
+
+.safe {
+    background-color: green;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 3px;
 }
 
+.kindaSafe {
+    background-color: greenyellow;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.unSafe{
+    background-color: orange;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+
+.danger{
+    background-color: red;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 3px;
+
+}
+
+.stayInside{
+    background-color: hotpink;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+h4 {
+    margin: 0 auto;
+    font-size: 15px;
+
+}
+
+p {
+    margin: 0 auto;
+
+}
+
+.h-100{
+    background-color: #7e92f0;
+    
+}
+
+h1{
+    margin: 0 auto;
+    font-size: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(52,58,64);
+}

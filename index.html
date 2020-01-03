@@ -10,50 +10,92 @@
     <title>WeatherAPI</title>
 </head>
 <body>
-    <div class="container">
+    
     <div class="container-fluid" id="titleCard">
         <h1>Weather Dashboard</h1>
     </div>
-        <div class="row row-cols-3">
-          <div class="col-4">
-            <div class="container-fluid" id= savedSearch>
+   
+        <div class="row-md-4 col-md-12" id="coolForm">
+         
+            <div class="container" id = "savedSearch">
                    
                 <div class="input-group mb-3">
                          <input type="text" class="form-control" id="cityInput" placeholder="Enter City">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" id="search-Btn">Search</button>
-                         </div>
-                
-                
-                
-                </div>
-                
-                <div id=previousSearch>
-                    
-                    
-                </div>     
+                        </div>
+
             </div>
+            <div class="row-md-4" id="previousSearch">
+                    
+                    
+            </div> 
           </div>
           
           
-          <div class="col-8">
+          <div class="col-md-9" id="results">
                 
                 <div class="card">
-                  <div class="card-header" id="cityName">
+                  <div class="card-header" id="cityDisplay">
                     
                   </div>
                   <div class="card-body">
-                    <h5 class="card-title" id="temperature"></h5>
-                    <p class="card-text" id="humidity"></p>
+                    <h5 class="card-title" id="temperature">Temperature: </h5>
+                    <p class="card-text" id="humidity"> Humidity:</p>
                     <br>
-                    <p class="card-text" id="Wind Speed"></p>
+                    <p class="card-text" id="windSpeed">Wind Speed: </p>
                     <br>
-                    <p class="card-text" id="UVindex"></p>
+                          <!-- added span to select just number return -->
+                    <p> UV Index: <span class="" id="UVindex"> </span>  </p>
                     <br>
                   </div>
                 </div>
 
-            <div class="row-5">
+
+
+                <div class="container-fluid">
+                  <h1>Five Day Forecast</h1>
+                  <div class="row">
+                      <div class="col col-md-4">
+                          <div class="card h-100">
+                              <h4 id=forecastDate1> </h4>
+                              <p  id="tempHumid1"></p>
+                            </div>
+                      </div>
+                      
+                      <div class="col col-md-4">
+                        <div class="card h-100">
+                            <h4 id=forecastDate2> </h5>
+                              <p  id="tempHumid2"></p>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col col-md-4">
+                      <div class="card h-100">
+                          <h4 id=forecastDate3 ></h4>
+                          <p  id="tempHumid3"></p>
+                      </div>
+                  </div>
+                  
+                  
+                  <div class="col col-md-4">
+                    <div class="card h-100">
+                        <h4 id=forecastDate4 ></h4>
+                        <p  id="tempHumid4"></p>
+                    </div>
+                </div>
+               
+               
+                <div class="col col-md-4">
+                  <div class="card h-100">
+                      <h4 id=forecastDate5></h4>
+                      <p  id="tempHumid5"></p>
+                  </div>
+              </div>
+                      </div>
+                  </div>
+              </div>
                 
             </div>
             
@@ -62,8 +104,8 @@
           </div>
           
         </div>
-      </div>
-
+      <!-- Using moment to display the dates in the right format -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
       <script src="script.js"></script>
 </body>
 </html>
