@@ -108,6 +108,7 @@ p {
     border-width: 3px;
     color: black;
     border-color: rgb(79, 88, 97);
+    margin: 0 auto;
 }
 
 h2{
