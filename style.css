@@ -16,6 +16,26 @@
     body {
         background-color: gainsboro;
     }
+
+.rain {
+    background-image: url('images/rain.jpg');
+    background-size: cover;
+}
+
+.snow {
+    background-image: url('images/snow.jpg');
+    background-size: cover;
+}
+
+.sunny {
+    background-image: url('images/sun.jpg');
+    background-size: cover;
+}
+
+.cloudy{
+    background-image: url('images/cloud.jpg');
+    background-size: cover;
+}
     
 #previousSearch {
     width: fit-content;
@@ -69,8 +89,11 @@
 
 h4 {
     margin: 0 auto;
-    font-size: 15px;
-
+    font-size: 20px;
+    color: whitesmoke;
+    text-decoration: underline;
+    background-color: rgb(100, 105, 110);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 p {
@@ -79,13 +102,19 @@ p {
 }
 
 .h-100{
-    background-color: #7e92f0;
-    
+    background-color: whitesmoke;
+    width: fit-content;
+    border-style: solid;
+    border-width: 3px;
+    color: black;
+    border-color: rgb(79, 88, 97);
 }
 
 h2{
     margin: 0 auto;
-    font-size: 50px;
+    font-size: 200%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: rgb(52,58,64);
+    background-color: whitesmoke;
+    width: fit-content;
 }

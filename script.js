@@ -3,8 +3,6 @@
 
     var savedHistory = $("<button>").text(storedHistory).addClass("form-control")
 
-
-
   $( document ).ready(function() {
     $(previousSearch).append(savedHistory)   
 });
@@ -41,8 +39,7 @@ $.ajax({
         var uvIndexURL = "https://api.openweathermap.org/data/2.5/uvi?appid" + apiKey + "&lat=" + cityLat[0] +  "&lon=" + cityLon[0]
 
 
-        $.ajax({
-            url: uvIndexURL,
+        $.ajax(uvIndexURL, {
             method: "GET"
         }).then(function(otherResponse){
           
@@ -53,22 +50,6 @@ $.ajax({
                 // making if else loop to assign color class to uv index
                 console.log(currentIndex[0])
                
-                if( currentIndex[0] < 2){
-                    console.log("safe")
-                 uvIndex.addClass('safe')
-                }
-                else{ if( 2 < currentIndex[0] < 5){
-                    console.log("safe")
-                uvIndex.addClass('kindaSafe')
-                    }else{if( currentIndex[0] < 7){
-                    uvIndex.addClass('unSafe')
-                    }else{if(currentIndex[0] < 10){
-                        uvIndex.addClass('danger')
-                    }else{uvIndex.addClass('stayInside')}}
-    
-                    }  
-                }
-            
             
             })
            
@@ -77,134 +58,254 @@ $.ajax({
             $(uvIndex).text(otherResponse.value)
             // making if else loop to assign color class to uv index
             console.log(currentIndex[0])
-           
-            if( currentIndex[0] < 2){
-                console.log("safe")
-             uvIndex.addClass('safe')
-            }
-            else{ if( 2 < currentIndex[0] < 5){
-                console.log("safe")
-            uvIndex.addClass('kindaSafe')
-                }else{if( currentIndex[0] < 7){
-                uvIndex.addClass('unSafe')
-                }else{if(currentIndex[0] < 10){
-                    uvIndex.addClass('danger')
-                }else{uvIndex.addClass('stayInside')}}
+            
+            localStorage.uvIndex = otherResponse.value
 
-                }  
-            }
-
+            if (currentIndex[0] < 2){
+                $(uvIndex.attr('class', 'safe'))
+                }
+            if (currentIndex[0] > 2 ){
+                $(uvIndex.attr('class', 'kindaSafe'))
+                }
+            if (currentIndex[0] > 5 ){
+                $(uvIndex.attr('class', 'unSafe'))
+                }
+            if (currentIndex[0] > 7 ){
+                $(uvIndex.attr('class', 'danger'))
+                }
+             if (currentIndex[0] > 10){
+                 $(uvIndex.attr('class', 'stayInside'))
+                }
         })
 
+        //Current Day
+        var temperature = $("#temperature")
+        var humidity = $('#humidity')
+        var windSpeed = $("#windSpeed")
+        var cityDisplay = $("#cityDisplay")
+        
+        
+        //background
+        var bodyBackground= $('#body')
+        var imageSelector= response.list[0].weather[0].main
+        
+        if (imageSelector === "Snow"){
+            $(bodyBackground.attr('class', 'snow'))
+        }
+        if (imageSelector === "Clouds"){
+            $(bodyBackground.attr('class', 'cloudy'))
+        }
+        if (imageSelector === "Rain"){
+            $(bodyBackground.attr('class', 'rain'))
+        }
+        if (imageSelector === "Clear"){
+            $(bodyBackground.attr('class', 'sunny'))
+        }
+        
+        console.log(imageSelector)
+
+
+        //Current Day Event Listeners
+        $(temperature).text("Temperature: " + response.list[0].main.temp + " °F");
+        $(humidity).text("Humidity:  " + response.list[0].main.humidity + "%")
+        $(windSpeed).text("Wind Speed: "+ response.list[0].wind.speed + " MPH"  )
+        $(cityDisplay).text(response.city.name + "  " + (moment().format('L')))
+
+
+        //Forecast Day 1
+        var forecastDay1 = $("#forecastDate1")
+        var forecastTemp1 = $("#tempHumid1")
+        var forecastHumidity1 = $("<p>").text("Humidity:  " + response.list[7].main.humidity + "%")
+        var forecastIcon1 = response.list[7].weather[0].icon
+        var forecastIcon1src= "http://openweathermap.org/img/wn/" + forecastIcon1 + "@2x.png" 
+        
+        // Event Listeners 1
+        $(forecastDay1).text(moment().add(1, 'days').format('L'))
+        $(forecastDay1).append(`<img src=${forecastIcon1src}>`)
+        $(forecastTemp1).text("Temperature: "+ response.list[7].main.temp + " °F").append(forecastHumidity1)
+
+
+        //Forecast Day 2
+        var forecastDay2 = $("#forecastDate2")
+        var forecastTemp2 = $("#tempHumid2")
+        var forecastHumidity2 = $("<p>").text("Humidity:  " + response.list[15].main.humidity + "%")
+        var forecastIcon2 = response.list[15].weather[0].icon
+        var forecastIcon2src= "http://openweathermap.org/img/wn/" + forecastIcon2 + "@2x.png" 
+        
+        // Event Listeners 2
+        $(forecastDay2).text(moment().add(2, 'days').format('L'))
+        $(forecastDay2).append(`<img src=${forecastIcon2src}>`)
+        $(forecastTemp2).text("Temperature: "+ response.list[15].main.temp + " °F").append(forecastHumidity2)
+
+
+        //Forecast Day 3
+        var forecastDay3 = $("#forecastDate3")
+        var forecastTemp3 = $("#tempHumid3")
+        var forecastHumidity3 = $("<p>").text("Humidity:  " + response.list[23].main.humidity + "%")
+        var forecastIcon3 = response.list[23].weather[0].icon
+        var forecastIcon3src= "http://openweathermap.org/img/wn/" + forecastIcon3 + "@2x.png" 
        
-       
+        // Event Listeners 3
+        $(forecastDay3).text(moment().add(3, 'days').format('L'))
+        $(forecastDay3).append(`<img src=${forecastIcon3src}>`)
+        $(forecastTemp3).text("Temperature: "+ response.list[23].main.temp + " °F").append(forecastHumidity3)
+
+
+        //Forecast Day 4
+        var forecastDay4 = $("#forecastDate4")
+        var forecastTemp4 = $("#tempHumid4")
+        var forecastHumidity4 = $("<p>").text("Humidity:  " + response.list[31].main.humidity + "%")
+        var forecastIcon4 = response.list[31].weather[0].icon
+        var forecastIcon4src= "http://openweathermap.org/img/wn/" + forecastIcon4 + "@2x.png" 
+        
+        // Event Listeners 4
+        $(forecastDay4).text(moment().add(4, 'days').format('L'))
+        $(forecastDay4).append(`<img src=${forecastIcon4src}>`)
+        $(forecastTemp4).text("Temperature: "+ response.list[31].main.temp + " °F").append(forecastHumidity4)
+
+
+        //Forecast Day 5
+        var forecastDay5 = $("#forecastDate5")
+        var forecastTemp5 = $("#tempHumid5")
+        var forecastHumidity5 = $("<p>").text("Humidity:  " + response.list[39].main.humidity + "%")
+        var forecastIcon5 = response.list[39].weather[0].icon
+        var forecastIcon5src= "http://openweathermap.org/img/wn/" + forecastIcon5 + "@2x.png" 
+        
+        
+        // Event Listeners 5
+        $(forecastDay5).text(moment().add(5, 'days').format('L'))
+        $(forecastDay5).append(`<img src=${forecastIcon5src}>`)
+        $(forecastTemp5).text("Temperature: "+ response.list[39].main.temp + " °F").append(forecastHumidity5)
+
+
+        // Search History
         var previousSearch = $("#previousSearch");
         var searchHistory = $("<button>").text(cityName).text(cityName).addClass("form-control")
-        var temperature = $("#temperature")
-        var humidity = $('#humidity')
-        var windSpeed = $("#windSpeed")
-        var cityDisplay = $("#cityDisplay")
-        var forecastDay1 = $("#forecastDate1")
-        var forecastDay2 = $("#forecastDate2")
-        var forecastDay3 = $("#forecastDate3")
-        var forecastDay4 = $("#forecastDate4")
-        var forecastDay5 = $("#forecastDate5")
-        var forecastTemp1 = $("#tempHumid1")
-        var forecastTemp2 = $("#tempHumid2")
-        var forecastTemp3 = $("#tempHumid3")
-        var forecastTemp4 = $("#tempHumid4")
-        var forecastTemp5 = $("#tempHumid5")
-        var forecastHumidity1 = $("<p>").text("Humidity:  " + response.list[7].main.humidity + "%")
-        var forecastHumidity2 = $("<p>").text("Humidity:  " + response.list[15].main.humidity + "%")
-        var forecastHumidity3 = $("<p>").text("Humidity:  " + response.list[23].main.humidity + "%")
-        var forecastHumidity4 = $("<p>").text("Humidity:  " + response.list[31].main.humidity + "%")
-        var forecastHumidity5 = $("<p>").text("Humidity:  " + response.list[39].main.humidity + "%")
-        var forecastIcon1 = $(response.list[7].weather[0])
-        var forecastIcon1txt = forecastIcon1[0].icon
-        var forecastIcon1src= "http://openweathermap.org/img/wn/" + forecastIcon1txt + "@2x.png" 
-        
-        console.log(forecastIcon1src)
-      
-
-
-
-
-        
-        
         localStorage.history = $(searchHistory).html();
-
-
-        
-       
-       
-        
-         //Event listeners
-
-
-        $(temperature).text("Temperature: " + response.list[0].main.temp + " °F");
-        $(humidity).text("Humidity:  " + response.list[0].main.humidity + "%")
-        $(windSpeed).text("Wind Speed: "+ response.list[0].wind.speed + " MPH"  )
-        $(cityDisplay).text(response.city.name + "  " + (moment().format('L')))
-
-        $(forecastDay1).text(moment().add(1, 'days').format('L'))
-        $(forecastDay2).text(moment().add(2, 'days').format('L'))
-        $(forecastDay3).text(moment().add(3, 'days').format('L'))
-        $(forecastDay4).text(moment().add(4, 'days').format('L'))
-        $(forecastDay5).text(moment().add(5, 'days').format('L'))
-        $(forecastTemp1).text("Temperature: "+ response.list[7].main.temp + " °F").append(forecastHumidity1)
-        $(forecastTemp2).text("Temperature: "+ response.list[15].main.temp + " °F").append(forecastHumidity2)
-        $(forecastTemp3).text("Temperature: "+ response.list[23].main.temp + " °F").append(forecastHumidity3)
-        $(forecastTemp4).text("Temperature: "+ response.list[31].main.temp + " °F").append(forecastHumidity4)
-        $(forecastTemp5).text("Temperature: "+ response.list[39].main.temp + " °F").append(forecastHumidity5)
-       
-        console.log(response.list[24].main.temp)
-        
         $(previousSearch).append(searchHistory); 
-        
-       
+
         
     $(searchHistory).on("click", function fetchWeather(){
-        var temperature = $("#temperature")
-        var humidity = $('#humidity')
-        var windSpeed = $("#windSpeed")
-        var cityDisplay = $("#cityDisplay")
-        var forecastDay1 = $("#forecastDate1")
-        var forecastDay2 = $("#forecastDate2")
-        var forecastDay3 = $("#forecastDate3")
-        var forecastDay4 = $("#forecastDate4")
-        var forecastDay5 = $("#forecastDate5")
-        var forecastTemp1 = $("#tempHumid1")
-        var forecastTemp2 = $("#tempHumid2")
-        var forecastTemp3 = $("#tempHumid3")
-        var forecastTemp4 = $("#tempHumid4")
-        var forecastTemp5 = $("#tempHumid5")
-        var forecastHumidity1 = $("<p>").text("Humidity:  " + response.list[7].main.humidity + "%")
-        var forecastHumidity2 = $("<p>").text("Humidity:  " + response.list[15].main.humidity + "%")
-        var forecastHumidity3 = $("<p>").text("Humidity:  " + response.list[23].main.humidity + "%")
-        var forecastHumidity4 = $("<p>").text("Humidity:  " + response.list[31].main.humidity + "%")
-        var forecastHumidity5 = $("<p>").text("Humidity:  " + response.list[39].main.humidity + "%")
-        var forecastIcon1 = $(response.list[7].weather[0])
-        var forecastIcon1txt = forecastIcon1[0].icon
-        var forecastIcon1src= "https://openweathermap.org/img/wn/" + forecastIcon1txt + "@2x.png" 
+          //Current Day
+          var temperature = $("#temperature")
+          var humidity = $('#humidity')
+          var windSpeed = $("#windSpeed")
+          var cityDisplay = $("#cityDisplay")
+
+               //background
+               var bodyBackground= $('#body')
+               var imageSelector= response.list[0].weather[0].main
+               if (imageSelector === "Snow"){
+                $(bodyBackground.attr('class', 'snow'))
+                }
+                 if (imageSelector === "Clouds"){
+                $(bodyBackground.attr('class', 'cloudy'))
+                }
+             if (imageSelector === "Rain"){
+                $(bodyBackground.attr('class', 'rain'))
+                }
+             if (imageSelector === "Clear"){
+                $(bodyBackground.attr('class', 'sunny'))
+                }
+
+          //Current Day Event Listeners
+          $(temperature).text("Temperature: " + response.list[0].main.temp + " °F");
+          $(humidity).text("Humidity:  " + response.list[0].main.humidity + "%")
+          $(windSpeed).text("Wind Speed: "+ response.list[0].wind.speed + " MPH"  )
+          $(cityDisplay).text(response.city.name + "  " + (moment().format('L')))
+  
+  
+          //Forecast Day 1
+          var forecastDay1 = $("#forecastDate1")
+          var forecastTemp1 = $("#tempHumid1")
+          var forecastHumidity1 = $("<p>").text("Humidity:  " + response.list[7].main.humidity + "%")
+          var forecastIcon1 = response.list[7].weather[0].icon
+          var forecastIcon1src= "http://openweathermap.org/img/wn/" + forecastIcon1 + "@2x.png" 
+          
+          // Event Listeners 1
+          $(forecastDay1).text(moment().add(1, 'days').format('L'))
+          $(forecastDay1).append(`<img src=${forecastIcon1src}>`)
+          $(forecastTemp1).text("Temperature: "+ response.list[7].main.temp + " °F").append(forecastHumidity1)
+  
+  
+          //Forecast Day 2
+          var forecastDay2 = $("#forecastDate2")
+          var forecastTemp2 = $("#tempHumid2")
+          var forecastHumidity2 = $("<p>").text("Humidity:  " + response.list[15].main.humidity + "%")
+          var forecastIcon2 = response.list[15].weather[0].icon
+          var forecastIcon2src= "http://openweathermap.org/img/wn/" + forecastIcon2 + "@2x.png" 
+          
+          // Event Listeners 2
+          $(forecastDay2).text(moment().add(2, 'days').format('L'))
+          $(forecastDay2).append(`<img src=${forecastIcon2src}>`)
+          $(forecastTemp2).text("Temperature: "+ response.list[15].main.temp + " °F").append(forecastHumidity2)
+  
+  
+          //Forecast Day 3
+          var forecastDay3 = $("#forecastDate3")
+          var forecastTemp3 = $("#tempHumid3")
+          var forecastHumidity3 = $("<p>").text("Humidity:  " + response.list[23].main.humidity + "%")
+          var forecastIcon3 = response.list[23].weather[0].icon
+          var forecastIcon3src= "http://openweathermap.org/img/wn/" + forecastIcon3 + "@2x.png" 
+         
+          // Event Listeners 3
+          $(forecastDay3).text(moment().add(3, 'days').format('L'))
+          $(forecastDay3).append(`<img src=${forecastIcon3src}>`)
+          $(forecastTemp3).text("Temperature: "+ response.list[23].main.temp + " °F").append(forecastHumidity3)
+  
+  
+          //Forecast Day 4
+          var forecastDay4 = $("#forecastDate4")
+          var iconDay4 = $("#icon4")
+          var forecastTemp4 = $("#tempHumid4")
+          var forecastHumidity4 = $("<p>").text("Humidity:  " + response.list[31].main.humidity + "%")
+          var forecastIcon4 = response.list[31].weather[0].icon
+          var forecastIcon4src= "http://openweathermap.org/img/wn/" + forecastIcon4 + "@2x.png" 
+          
+          // Event Listeners 4
+          $(forecastDay4).text(moment().add(4, 'days').format('L'))
+          $(forecastDay4).append(`<img src=${forecastIcon4src}>`)
+          $(forecastTemp4).text("Temperature: "+ response.list[31].main.temp + " °F").append(forecastHumidity4)
+  
+  
+          //Forecast Day 5
+          var forecastDay5 = $("#forecastDate5")
+          var forecastTemp5 = $("#tempHumid5")
+          var forecastHumidity5 = $("<p>").text("Humidity:  " + response.list[39].main.humidity + "%")
+          var forecastIcon5 = response.list[39].weather[0].icon
+          var forecastIcon5src= "http://openweathermap.org/img/wn/" + forecastIcon5 + "@2x.png" 
+          
+          
+          // Event Listeners 5
+          $(forecastDay5).text(moment().add(5, 'days').format('L'))
+          $(forecastDay5).append(`<img src=${forecastIcon5src}>`)
+          $(forecastTemp5).text("Temperature: "+ response.list[39].main.temp + " °F").append(forecastHumidity5)
+
+        // UV index background color using local storage
+        var uvIndex= $("#UVindex")
+        var uvStorage = localStorage.uvIndex
+
+        $(uvIndex).text(uvStorage)
+       
+        if (uvStorage < 2){
+            $(uvIndex.attr('class', 'safe'))
+            }
+        if (uvStorage > 2 ){
+            $(uvIndex.attr('class', 'kindaSafe'))
+            }
+        if (uvStorage > 5 ){
+            $(uvIndex.attr('class', 'unSafe'))
+            }
+        if (uvStorage > 7 ){
+            $(uvIndex.attr('class', 'danger'))
+            }
+         if (uvStorage > 10){
+             $(uvIndex.attr('class', 'stayInside'))
+            }
 
 
-
-        $(temperature).text("Temperature: " + response.list[0].main.temp + " °F");
-        $(humidity).text("Humidity:  " + response.list[0].main.humidity + "%")
-        $(windSpeed).text("Wind Speed: "+ response.list[0].wind.speed + " MPH"  )
-        $(cityDisplay).text(response.city.name + "  " + (moment().format('L')))
-
-        $(forecastDay1).text(moment().add(1, 'days').format('L'))
-        $(forecastDay2).text(moment().add(2, 'days').format('L'))
-        $(forecastDay3).text(moment().add(3, 'days').format('L'))
-        $(forecastDay4).text(moment().add(4, 'days').format('L'))
-        $(forecastDay5).text(moment().add(5, 'days').format('L'))
-        $(forecastTemp1).text("Temperature: "+ response.list[7].main.temp + " °F").append(forecastHumidity1)
-        $(forecastTemp2).text("Temperature: "+ response.list[15].main.temp + " °F").append(forecastHumidity2)
-        $(forecastTemp3).text("Temperature: "+ response.list[23].main.temp + " °F").append(forecastHumidity3)
-        $(forecastTemp4).text("Temperature: "+ response.list[31].main.temp + " °F").append(forecastHumidity4)
-        $(forecastTemp5).text("Temperature: "+ response.list[39].main.temp + " °F").append(forecastHumidity5)
     })
+    
     
   
 });
