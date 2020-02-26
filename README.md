@@ -12,4 +12,5 @@ Project Title = Weather Service
 
 This project has been completed using a myriad of tools along the way. Including the mastery of filling in links wether they be sources for images or ajax calls. Along the way I tried to add more and more features while fixing old bugs. Can confidnelty say this is the most organized code I have yet to have, and any bugs come at the expense of my lack of knowledge. Although there have been many apps such as this one, I beleive that this app showcases my abilities wether it be in design, repsonsivness, and mainly showcases my drastic improvemnt in writing and executing functions using Jquery. 
 
+![Screen Shot 2020-01-06 at 1 52 51 PM](https://user-images.githubusercontent.com/56040246/71840891-3589cf00-308c-11ea-9cf9-36f582cd9724.png)
 
